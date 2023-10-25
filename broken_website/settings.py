@@ -21,12 +21,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-#THIS IS CORRECT ONE
+#THIS IS THE ORIGINAL DJANGO KEY
 #SECRET_KEY = "django-insecure-yn+^drs8hbbce$$)e890wb--_n0lq4oxrv%xxgg9&v0r%1jwu2"
-
 
 #THIS IS A VULNERABLE SECRET KEY
 SECRET_KEY = "secret_key"
+
+#HERE IS A PROPOSED FIX TO THE SECRET KEY VULNERABILITY
+#USING AN ENVIRONMENT VARIABLE
+#DOCUMENTATION FOR THE USED LIBRARY --> https://pypi.org/project/python-decouple/
+#from decouple import config
+#SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
