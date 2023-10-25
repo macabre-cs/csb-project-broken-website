@@ -20,5 +20,4 @@ def register(request):
             return redirect(reverse("dashboard"))
     else:
         form = CustomUserCreationForm()
-        #print(form.errors.as_data())
     return render(request, "users/dashboard.html", context={"form":form})
