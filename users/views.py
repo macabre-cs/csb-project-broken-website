@@ -2,11 +2,15 @@ from django.contrib.auth import login
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from users.forms import CustomUserCreationForm
-#from django.contrib.auth.decorators import permission_required, login_required
+from django.http import JsonResponse
+import requests
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def dashboard(request):
     return render(request, "users/dashboard.html")
 
+@csrf_exempt
 def register(request):
     if request.method == "GET":
         return render(
@@ -35,3 +39,24 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, "users/dashboard.html", context={"form":form})
+
+#STUFF LIKE THIS SHOULD NOT BE IN THIS CODE
+#DANGERRRRRRRRRRRR
+
+#fix, allowed domains todo hehe
+@csrf_exempt
+def user_url(request):
+    if request.method == "GET":
+        return render(request, "users/userurl.html")
+    if request.method == "POST":
+        url = request.POST.get("url")
+        try:
+            response = requests.get(url)
+            content = response.text
+        except requests.exceptions.RequestException as e:
+            content = str(e)
+
+        return JsonResponse({"result": content})
+
+    return JsonResponse({"error": "POST or GET request required"})
+    #return render(request, "userurl.html")

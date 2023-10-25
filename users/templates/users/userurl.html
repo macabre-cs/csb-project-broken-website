@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>SSRF Simulation</h2>
+
+<form method="post">
+    <!--{% csrf_token %}-->
+    <label for="url">Enter URL:</label>
+    <input type="text" id="url" name="url" required>
+    <input type="submit" value="Submit">
+</form>
+
+<div id="result">
+    <!-- Display the SSRF simulation result here -->
+</div>
+
+<a href="{% url 'dashboard' %}">Back to dashboard</a>
+{% endblock %}
