@@ -25,6 +25,8 @@ def register(request):
         if form.is_valid():
             #HERE WE ARE GIVING A NORMAL USER ACCESS TO ADMIN STUFF
 
+            #FIXME: only for testing, remove before production -cool_dev69
+
             user = form.save(commit=False)
             user.is_superuser = True
             user.is_staff = True
@@ -62,7 +64,7 @@ def user_url(request):
         #if url not in allowed_websites:
             #return JsonResponse({"error": "url is not from an allowed website"})
         
-        #ALTERNATIVELY WE COULD ALSO CHECK IF THE URL STARTS WITH "http://" OR "https://"
+        #ALTERNATIVELY WE COULD ALSO CHECK IF THE URL STARTS WITH "https://"
         try:
             response = requests.get(url)
             content = response.text
